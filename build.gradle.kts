@@ -1,9 +1,9 @@
 import com.android.build.gradle.BaseExtension
 import java.net.URL
 
-apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.Joyoe'
+// apply plugin: 'com.android.library'
+// apply plugin: 'com.github.dcendents.android-maven'
+// group='com.github.Joyoe'
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
