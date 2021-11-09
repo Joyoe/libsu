@@ -89,7 +89,7 @@ class IPCClient implements IBinder.DeathRecipient, Closeable {
                 name.flattenToString(), CMDLINE_STOP_SERVER /* command args */);
         // Make sure cmd is properly formatted in shell
         cmd = cmd.replace("$", "\\$");
-        Shell.su(cmd).exec();
+        Shell.jojo(cmd).exec();
     }
 
     private static String getBroadcastAction(ComponentName name) {
@@ -137,7 +137,7 @@ class IPCClient implements IBinder.DeathRecipient, Closeable {
             cmd = LOGGING_ENV + "=1 " + cmd;
 
         synchronized (this) {
-            Shell.su("(" + cmd + ")&").exec();
+            Shell.jojo("(" + cmd + ")&").exec();
             // Wait for broadcast receiver
             wait();
         }

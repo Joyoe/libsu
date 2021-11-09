@@ -48,9 +48,9 @@ import java.util.concurrent.TimeUnit;
  * Use these high level APIs instead:
  * <ul>
  *     <li>{@link #sh(String...)}</li>
- *     <li>{@link #su(String...)}</li>
+ *     <li>{@link #jojo(String...)}</li>
  *     <li>{@link #sh(InputStream)}</li>
- *     <li>{@link #su(InputStream)}</li>
+ *     <li>{@link #jojo(InputStream)}</li>
  * </ul>
  * These methods not only use the main shell but also are more convenient to use.
  */
@@ -103,9 +103,9 @@ public abstract class Shell implements Closeable {
      * Note: This flag only affects the following methods:
      * <ul>
      *     <li>{@link #sh(String...)}</li>
-     *     <li>{@link #su(String...)}</li>
+     *     <li>{@link #jojo(String...)}</li>
      *     <li>{@link #sh(InputStream)}</li>
-     *     <li>{@link #su(InputStream)}</li>
+     *     <li>{@link #jojo(InputStream)}</li>
      *     <li>{@link Job#to(List)}</li>
      * </ul>
      * Check the descriptions of each method above for more details.
@@ -222,7 +222,7 @@ public abstract class Shell implements Closeable {
      * when the main shell does not have root access, the returned Job will do nothing.
      */
     @NonNull
-    public static Job su(@NonNull String... commands) {
+    public static Job jojo(@NonNull String... commands) {
         return MainShell.newJob(true, commands);
     }
 
@@ -251,7 +251,7 @@ public abstract class Shell implements Closeable {
      * when the main shell does not have root access, the returned Job will do nothing.
      */
     @NonNull
-    public static Job su(@NonNull InputStream in) {
+    public static Job jojo(@NonNull InputStream in) {
         return MainShell.newJob(true, in);
     }
 
@@ -302,7 +302,7 @@ public abstract class Shell implements Closeable {
     /**
      * Construct a new {@link Job} that uses the shell for execution.
      * <p>
-     * Unlike {@code Shell.su(...)/Shell.sh(...)}, <strong>NO</strong> output will
+     * Unlike {@code Shell.jojo(...)/Shell.sh(...)}, <strong>NO</strong> output will
      * be collected if the developer did not set the output destination with {@link Job#to(List)}
      * or {@link Job#to(List, List)}.
      * @return a job that the developer can execute or submit later.
@@ -437,10 +437,10 @@ public abstract class Shell implements Closeable {
          * the next method:
          * <ol>
          *     <li>If {@link #FLAG_NON_ROOT_SHELL} is not set and {@link #FLAG_MOUNT_MASTER}
-         *     is set, construct a Unix shell by calling {@code su --mount-master}.
+         *     is set, construct a Unix shell by calling {@code jojo --mount-master}.
          *     It may fail if the root implementation does not support mount master.</li>
          *     <li>If {@link #FLAG_NON_ROOT_SHELL} is not set, construct a Unix shell by calling
-         *     {@code su}. It may fail if the device is not rooted, or root permission is
+         *     {@code jojo}. It may fail if the device is not rooted, or root permission is
          *     not granted.</li>
          *     <li>Construct a Unix shell by calling {@code sh}. This would never fail in normal
          *     conditions, but should it fail, it will throw {@link NoShellException}</li>

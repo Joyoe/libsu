@@ -42,7 +42,7 @@ class CopyInputStream extends BaseSuInputStream {
         } catch (IOException e) {
             throw (FileNotFoundException) copyError.initCause(e);
         }
-        if (!Shell.su("cat " + file + " > " + tmp).to(null).exec().isSuccess())
+        if (!Shell.jojo("cat " + file + " > " + tmp).to(null).exec().isSuccess())
             throw copyError;
 
         in = new FileInputStream(tmp);
@@ -80,7 +80,7 @@ class CopyOutputStream extends BaseSuOutputStream {
         try {
             out.flush();
             out.close();
-            if (!Shell.su("cat " + tmp + op() + outFile).to(null).exec().isSuccess())
+            if (!Shell.jojo("cat " + tmp + op() + outFile).to(null).exec().isSuccess())
                 throw new IOException("Cannot write to target file");
         } finally {
           tmp.delete();

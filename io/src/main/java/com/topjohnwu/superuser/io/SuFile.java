@@ -471,7 +471,7 @@ public class SuFile extends File {
         if (!isDirectory())
             return null;
         String cmd = "ls -a " + escapedPath;
-        List<String> out = Shell.su(cmd).to(new LinkedList<>(), null).exec().getOut();
+        List<String> out = Shell.jojo(cmd).to(new LinkedList<>(), null).exec().getOut();
         for (ListIterator<String> it = out.listIterator(); it.hasNext();) {
             String name = it.next();
             if (name.equals(".") || name.equals("..") ||
